@@ -1,0 +1,79 @@
+apiVersion: v1
+entries:
+  filebeat:
+  - apiVersion: v2
+    appVersion: 7.16.2
+    created: "2022-01-16T18:21:20.657205+04:00"
+    description: A Helm chart for Filebeat
+    digest: 8201a940fe50689a54c1bdf089d035e4b389132bddadb0336ae487999ee427c8
+    keywords:
+    - logging
+    - filebeat
+    - monitoring
+    name: filebeat
+    type: application
+    urls:
+    - https://gevorgkhachatryan.github.io/monitoring-stack-helm-charts/filebeat-0.1.0.tgz
+    version: 0.1.0
+  monitoring-stack:
+  - apiVersion: v2
+    created: "2022-01-16T18:21:20.663325+04:00"
+    description: A set of monitoring tools.
+    digest: d53caa5d857175cbe77447374ba16298c20366bba3d54973fad6a67ca2cf057d
+    keywords:
+    - monitoring
+    - prometheus
+    - alertmanager
+    - netdata
+    - filebeat
+    - promtail
+    maintainers:
+    - email: davtyan.hayk@picsart.com
+      name: Hayk Davtyan
+    - email: gevorg.khachatryan@picsart.com
+      name: Jor Khachatryan
+    name: monitoring-stack
+    sources:
+    - https://github.com/prometheus/alertmanager
+    - https://github.com/prometheus/prometheus
+    - https://github.com/prometheus/pushgateway
+    - https://github.com/prometheus/node_exporter
+    - https://github.com/kubernetes/kube-state-metrics
+    - https://github.com/netdata/netdata
+    - https://github.com/elastic/beats/tree/master/filebeat
+    - https://github.com/grafana/loki
+    type: application
+    urls:
+    - https://gevorgkhachatryan.github.io/monitoring-stack-helm-charts/monitoring-stack-0.1.0.tgz
+    version: 0.1.0
+  netdata:
+  - apiVersion: v2
+    appVersion: v1.24.0
+    created: "2022-01-16T18:21:20.664038+04:00"
+    description: A Helm chart for Netdata
+    digest: 4b5053b874cac19cda066401aa1182ea40d66d53ae0a4e8904c4c2d6a4653ac4
+    keywords:
+    - netdata
+    - monitoring
+    - agent
+    name: netdata
+    type: application
+    urls:
+    - https://gevorgkhachatryan.github.io/monitoring-stack-helm-charts/netdata-0.1.0.tgz
+    version: 0.1.0
+  promtail:
+  - apiVersion: v2
+    appVersion: 2.3.0
+    created: "2022-01-16T18:21:20.666239+04:00"
+    description: A Helm chart for Promtail
+    digest: 7ed6943911a8be04077fe2d1f778f319555471e3016a184d05adf2e58422752a
+    keywords:
+    - logging
+    - promtail
+    - loki
+    name: promtail
+    type: application
+    urls:
+    - https://gevorgkhachatryan.github.io/monitoring-stack-helm-charts/promtail-0.1.0.tgz
+    version: 0.1.0
+generated: "2022-01-16T18:21:20.653971+04:00"
