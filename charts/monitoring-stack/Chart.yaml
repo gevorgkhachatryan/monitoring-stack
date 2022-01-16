@@ -1,0 +1,26 @@
+apiVersion: v2
+name: monitoring-stack
+version: 0.1.0
+description: A set of monitoring tools.
+sources:
+  - https://github.com/prometheus/alertmanager
+  - https://github.com/prometheus/prometheus
+  - https://github.com/prometheus/pushgateway
+  - https://github.com/prometheus/node_exporter
+  - https://github.com/kubernetes/kube-state-metrics
+  - https://github.com/netdata/netdata
+  - https://github.com/elastic/beats/tree/master/filebeat
+  - https://github.com/grafana/loki
+maintainers:
+  - name: Hayk Davtyan
+    email: davtyan.hayk@picsart.com
+  - name: Jor Khachatryan
+    email: gevorg.khachatryan@picsart.com
+type: application
+keywords:
+  - monitoring
+  - prometheus
+  - alertmanager
+  - netdata
+  - filebeat
+  - promtail

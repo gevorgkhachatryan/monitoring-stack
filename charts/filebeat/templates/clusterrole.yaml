@@ -1,0 +1,17 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  namespace: {{ .Values.namespace }}
+  name: {{ .Release.Name }}
+  labels:
+    app: {{ .Chart.Name }}
+rules:
+  - apiGroups: [""]
+    resources:
+      - namespaces
+      - pods
+      - nodes
+    verbs:
+      - get
+      - watch
+      - list

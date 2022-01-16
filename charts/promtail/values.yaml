@@ -1,0 +1,47 @@
+namespace:
+  name: promtail
+
+daemonset:
+  image: grafana/promtail:2.3.0
+  affinity: {}
+  lokiEndpoint: http://172.17.0.1:3100 #http://failover.picsart.loc:32101/loki/api/v1/push
+  resources:
+    requests:
+      memory: 30Mi
+      cpu: 0.01
+    limits:
+      memory: 150Mi
+      cpu: 0.3
+
+promtailConfig:
+  external_labels: {}
+  scrape_configs:
+  - job_name: kubernetes-full-logging
+    pipeline_stages:
+      - docker: {}
+    kubernetes_sd_configs:
+      - role: pod
+    relabel_configs:
+      - source_labels: [__meta_kubernetes_pod_container_name]
+        action: keep
+        regex: SOME_CONTAINER_NAME
+      - action: replace
+        source_labels:
+          - __meta_kubernetes_namespace
+        target_label: namespace
+      - action: replace
+        source_labels:
+          - __meta_kubernetes_pod_container_name
+        target_label: container_name
+      - source_labels:
+          - __meta_kubernetes_pod_node_name
+        target_label: node_name
+      - action: replace
+        source_labels:
+          - __meta_kubernetes_pod_name
+        target_label: pod_name
+      - replacement: /var/log/containers/$1*log
+        separator: /
+        source_labels:
+          - __meta_kubernetes_pod_name
+        target_label: __path__

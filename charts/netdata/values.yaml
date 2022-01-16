@@ -1,0 +1,17 @@
+# Namespace to deploy netdata
+namespace: netdata
+
+# Netdata image to deploy
+image: paopsmon/netdata:latest
+
+# if true the container will use host networking
+hostNetwork: false
+
+# resources limiting for containers
+resources:
+  requests:
+    memory: 300Mi
+    cpu: 100m
+  limits:
+    memory: 500Mi
+    cpu: 100m

@@ -1,0 +1,10 @@
+apiVersion: v2
+appVersion: 7.16.2
+description: A Helm chart for Filebeat
+name: filebeat
+version: 0.1.0
+type: application
+keywords:
+  - logging
+  - filebeat
+  - monitoring

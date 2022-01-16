@@ -1,0 +1,38 @@
+# Namespace to deploy filebeat
+namespace: filebeat
+
+daemonset:
+# Filebeat image to deploy
+image: docker.elastic.co/beats/filebeat:7.16.2
+
+affinity: {}
+
+resources:
+  limits:
+    memory: 200Mi
+  requests:
+    cpu: 100m
+    memory: 100Mi
+
+filebeatConfig:
+  filebeat.yml: |
+    filebeat.inputs:
+      - type: container
+        paths:
+          - /var/log/containers/*.log
+        exclude_files: []
+        fields: {log_type: k8s_logs}
+        tail_files: true
+        processors:
+          - add_kubernetes_metadata:
+              in_cluster: true
+              host: ${NODE_NAME}
+              matchers:
+              - logs_path:
+                  logs_path: "/var/log/containers/"
+
+# An output to send logs
+output: logstash
+output_hosts:
+  - 172.17.0.1:5044
+  - 172.17.0.1:5045

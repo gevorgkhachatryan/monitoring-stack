@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: {{ .Chart.Name }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Chart.Name }}
+  template:
+    metadata:
+      annotations:
+        container.apparmor.security.beta.kubernetes.io/netdata: unconfined
+      labels:
+        app: {{ .Chart.Name }}
+    spec:
+      hostNetwork: {{ .Values.hostNetwork }}
+      containers:
+        - name: netdata
+          image: {{ required "An image filed is required" .Values.image }}
+          env:
+            - name: NVIDIA_VISIBLE_DEVICES
+              value: all
+          securityContext:
+            capabilities:
+              add: ["SYS_PTRACE"]
+          volumeMounts:
+            - name: proc
+              mountPath: /host/proc
+            - name: sys
+              mountPath: /host/sys
+            - name: docker
+              mountPath: /var/run/docker.sock
+              readOnly: true
+            - name: slash
+              mountPath: /host
+              readOnly: true
+          resources: {{ toYaml ( .Values.resources ) | nindent 12 }}
+      restartPolicy: Always
+      volumes:
+        - name: proc
+          hostPath:
+            path: /proc
+        - name: sys
+          hostPath:
+            path: /sys
+        - name: docker
+          hostPath:
+            path: /var/run/docker.sock
+        - name: slash
+          hostPath:
+            path: /
